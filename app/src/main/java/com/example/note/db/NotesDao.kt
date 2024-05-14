@@ -23,7 +23,7 @@ interface NotesDao {
     @Query("SELECT * FROM notes")
     fun getNotes(): LiveData<List<Note>>
 
-    //el asterisco es para que traiga todo de cada nota
+    // el asterisco es para que traiga todo de cada nota
     @Query("SELECT * FROM notes WHERE id = :id")
     fun getById(id: Int): Note
 }
