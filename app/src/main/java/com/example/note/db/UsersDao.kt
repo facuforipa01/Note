@@ -20,7 +20,7 @@ interface UsersDao {
 
         //liveData es un observable (esta escuchando la lista de datos)
         @Query("SELECT * FROM users")
-        fun getNotes(): LiveData<List<User>>
+        fun getUsers(): LiveData<List<User>>
 
         @Query("SELECT * FROM users WHERE id = :id")
         fun getById(id: Int): User

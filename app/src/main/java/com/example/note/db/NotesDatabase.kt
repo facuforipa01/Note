@@ -6,16 +6,17 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.note.db.model.Note
+import com.example.note.db.model.User
 
 @Database(
-    entities = [(Note::class)],
+    entities = [(Note::class), (User::class)],
     version = 1,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class NotesDatabase : RoomDatabase() {
     abstract fun notesDao(): NotesDao
-
+    abstract fun usersDao(): UsersDao
 
     // unica instancia de esa base de datos (singleton)
     // si ya existe la devuelve, sino la crea
@@ -25,14 +26,14 @@ abstract class NotesDatabase : RoomDatabase() {
         private var INSTANCE: NotesDatabase? = null
 
         // si no hay una instancia creala, si no trae la creada
-        fun getInstance(context: Context): NotesDatabase{
+        fun getInstance(context: Context): NotesDatabase {
             synchronized(this) {
                 var instance = INSTANCE
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         NotesDatabase::class.java,
-                        "notes_database"
+                        "bd_app_notas"
                     ).fallbackToDestructiveMigration()
                         .build()
 
