@@ -7,6 +7,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+//el repository es como si fuese una api
 class NotesRepository(private val notesDao: NotesDao) {
     //las coroutinas hacen algo similar al async/await
     private val coroutine = CoroutineScope(Dispatchers.Main)
@@ -31,5 +32,9 @@ class NotesRepository(private val notesDao: NotesDao) {
         coroutine.launch(Dispatchers.IO) {
             notesDao.delete(id)
         }
+    }
+
+    suspend fun findById(id: Int): Note{
+        return notesDao.getById(id)
     }
 }
